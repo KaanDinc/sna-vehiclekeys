@@ -445,7 +445,7 @@ CreateThread(function()
             local entering = GetVehiclePedIsTryingToEnter(ped)
             if entering ~= 0 then
                 local status = GetVehicleDoorLockStatus(entering)
-                if status == 7 then
+                if status == 7 or status == 1 then --Checking for car empty or has a npc driver
                     SetVehicleDoorsLocked(entering, 2)
                     sleep = 2000
                 end
