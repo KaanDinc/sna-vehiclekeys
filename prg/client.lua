@@ -443,9 +443,15 @@ CreateThread(function()
             local sleep = 100
             local ped = PlayerPedId()
             local entering = GetVehiclePedIsTryingToEnter(ped)
+            local driver = GetPedInVehicleSeat(entering, -1)
+            local checkfornpc = IsPedAPlayer(driver)
             if entering ~= 0 then
                 local status = GetVehicleDoorLockStatus(entering)
-                if status == 7 or status == 1 then --Checking for car empty or has a npc driver
+                print(driver)
+                if status == 7 then 
+                    SetVehicleDoorsLocked(entering, 2)
+                    sleep = 2000
+                elseif not checkfornpc and driver ~= 0 then
                     SetVehicleDoorsLocked(entering, 2)
                     sleep = 2000
                 end
